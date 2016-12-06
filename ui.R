@@ -1,0 +1,45 @@
+library(dplyr)
+library(shiny)
+library(plotly)
+
+# sourcing in the data from buildvisual.R
+source('Chart1/buildvisual.R')
+
+# using shinyUI to create the app with a side panel that contains options for the county and 
+# information about the graph and a main panel with the scatter plot
+shinyUI(fluidPage(
+    navbarPage('Overweight and Obese Students in New York',
+               tabPanel('Home'
+                           #put summary code here#
+                           ),
+               tabPanel('Map'
+                   
+               ),
+               tabPanel('Scatterplot',
+    # creating a title for the tab
+    headerPanel('Number of Obese and Overweight Students in New York by County'),
+    sidebarPanel(
+        # adding help text to help people understand the plot
+        helpText("Select a County in New York to display the number of Obese and Overweight Students
+                 in the county selected. The colors of the scatter points represent the grade category 
+                 (including the district total). Hover over a scatter point to discover what school 
+                 district or area the students are from and the exact number of students overweight and obese 
+                 in that specific school."),
+        # creating a divider
+        hr(),
+        # creating a drop down to choose the county to display on the plot
+        selectInput("countyname", label = 'County', choices = Student.Weight.1$COUNTY, selected = 'albany')
+                    ),
+    mainPanel(
+        # setting the main panel for the scatter plot
+        plotlyOutput('scatter')
+    )
+               ),
+    tabPanel('Bar Graph'
+             
+             #put code here#
+             
+             )
+        )
+    )
+)
