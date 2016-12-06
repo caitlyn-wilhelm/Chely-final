@@ -36,13 +36,14 @@ map.data$NAME <- toupper(map.data$NAME)
 combined.map.data <- merge(map.data, data, by.x = "NAME", by.y = "County")
 
 #create map popups
-county_popup <- paste0(combined.map.data$NAME, " county", 
+names <- paste0(substr(combined.map.data$NAME, 0, 1), tolower(substr(combined.map.data$NAME), 1))
+county_popup <- paste0(names, " county", 
                       "<br>with an obesity rate of ", 
                       combined.map.data$Pct.Obese)
 
 #create color palette
 pal <- colorNumeric(
-  palette = "Blues",
+  palette = rev(brewer.pal(10,"RdBu")),
   domain = combined.map.data$Pct.Obese
 )
 
@@ -54,7 +55,8 @@ map <- leaflet(combined.map.data) %>%
               weight = 1, fillColor = ~pal(Pct.Obese), popup = county_popup
   ) %>% 
   addLegend("bottomright", pal = pal, values = ~Pct.Obese,
-              title = "Student Percentage Obese",
+              title = "Students Obese (%)",
               labFormat = labelFormat(suffix = "%"),
               opacity = 1
   )
+map
