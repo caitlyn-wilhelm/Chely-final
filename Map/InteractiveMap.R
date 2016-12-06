@@ -3,7 +3,7 @@ library(leaflet)
 library(rgdal)
 
 #Read in data from csv in Data folder
-data <- read.csv("Data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
+data <- read.csv("~/GitHub/Chely-final/Data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
 
 #modify data to fit for a map
 #-----------------------------
@@ -27,7 +27,7 @@ data[40,2] <- "ST. LAWRENCE"
 #----------------------------
 
 # read in map data as a Spatial Polygons Data Frame
-map.data <- readShapeSpatial("Data/NY_Map/NY_counties_clip.shp")
+map.data <- readShapeSpatial("~/GitHub/Chely-final/Data/NY_Map/NY_counties_clip.shp")
 
 #change county names to uppercase for merge
 map.data$NAME <- toupper(map.data$NAME)
@@ -35,16 +35,26 @@ map.data$NAME <- toupper(map.data$NAME)
 #merge map data with county data
 combined.map.data <- merge(map.data, data, by.x = "NAME", by.y = "County")
 
+BuildMap <- function(mapped.data) {
+
+if(mapped.data == "Obese") {
+  value <- combined.map.data$Pct.Obese
+} else if(mapped.data == "Overweight") {
+  value <- combined.map.data$Pct.Overweight
+} else if(mapped.data == "Obese.and.Overweight") {
+  value <- combined.map.data$Pct.Overweight.Or.Obese
+}
+  
 #create map popups
-names <- paste0(substr(combined.map.data$NAME, 0, 1), tolower(substr(combined.map.data$NAME), 1))
-county_popup <- paste0(names, " county", 
-                      "<br>with an obesity rate of ", 
-                      combined.map.data$Pct.Obese)
+names <- paste0(substr(combined.map.data$NAME, 0, 1), tolower(substr(combined.map.data$NAME, 2, 10000)))
+county_popup <- paste0(names, " county", " with a",
+                      "<br>student ", tolower(mapped.data), " rate of ", 
+                      paste0(value,"%"))
 
 #create color palette
 pal <- colorNumeric(
   palette = rev(brewer.pal(10,"RdBu")),
-  domain = combined.map.data$Pct.Obese
+  domain = value
 )
 
 #create map with legend
@@ -52,11 +62,12 @@ map <- leaflet(combined.map.data) %>%
   addPolygons(
               fillOpacity = 0.8, 
               color = "#BDBDC3", 
-              weight = 1, fillColor = ~pal(Pct.Obese), popup = county_popup
+              weight = 1, fillColor = ~pal(value), popup = county_popup
   ) %>% 
-  addLegend("bottomright", pal = pal, values = ~Pct.Obese,
-              title = "Students Obese (%)",
+  addLegend("bottomright", pal = pal, values = ~value,
+              title = paste0("Students ", tolower(mapped.data), " (%)"),
               labFormat = labelFormat(suffix = "%"),
               opacity = 1
   )
-map
+  return(map)
+}
