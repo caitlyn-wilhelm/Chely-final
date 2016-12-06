@@ -3,22 +3,22 @@ library(shiny)
 library(plotly)
 
 # reading in the data for the student weight in New York 
-Student.Weight <- read.csv("~/Documents/info-201/Chely-final/data/StudentWeight.csv")
+Student.Weight <- read.csv("~/Documents/info-201/Chely-final/data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
 
 # creating a new data frame to select only certain columns
-Student.Weight.1 <- select(Student.Weight, area_name, county, grade_category, obese_1, overweight_1, overweight_or_obese_1)
+Student.Weight.1 <- select(Student.Weight, AREA.NAME, COUNTY, GRADE.LEVEL, NO..OBESE, NO..OVERWEIGHT, NO..OVERWEIGHT.OR.OBESE)
 
 # Creating a function called buildscatter to create a scatter plot for the obese and overweight in each county
 BuildScatter <- function(countyname) {
   # creating a new dataframe that filters to only one county
-  Student.Weight.2 <- filter(Student.Weight.1, county == countyname)
+  Student.Weight.2 <- filter(Student.Weight.1, COUNTY == countyname)
   # creating the plotly scatter plot
-  weight.plot <- plot_ly(data = Student.Weight.2, x = ~obese_1, y = ~overweight_1,
+  weight.plot <- plot_ly(data = Student.Weight.2, x = ~NO..OBESE, y = ~NO..OVERWEIGHT,
                          # creating the text to show when hovering over a point
-                         text = ~paste("School District: ", area_name, "<br>Obese Students: ", obese_1, "<br>Overweight Students: ", overweight_1),
+                         text = ~paste("School District/Area Name: ", AREA.NAME, "<br>Obese Students: ", NO..OBESE, "<br>Overweight Students: ", NO..OVERWEIGHT),
                          type = 'scatter', 
-                         mode = 'markers', marker = list(size = 12, opacity = 0.75), 
-                         color = ~grade_category) %>%
+                         mode = 'markers', marker = list(size = 8, opacity = 0.75), 
+                         color = ~GRADE.LEVEL) %>%
                  # making a title for the plot, xaxis, and yaxis and changing the colors
                  layout(title = 'Obese and Overweight Students by County',
                         yaxis = list(title = 'Number of Students Overweight',
