@@ -1,4 +1,6 @@
-source("~/Chely-final/Summary/Summary Information.R")
+library(shiny)
+
+source("Summary Information.R")
 
 shinyServer(function(input,output){
  

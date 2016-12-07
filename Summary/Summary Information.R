@@ -1,4 +1,4 @@
-data <- read.csv('~/Chely-final/data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv')
+data <- read.csv("~/Info 201/Assignments/Chely-final/Data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
 library(dplyr)
 
 #dataframe that contains regions

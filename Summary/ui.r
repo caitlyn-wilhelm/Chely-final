@@ -1,7 +1,7 @@
-
+library(shiny)
 
 shinyUI(fluidPage(
-  titlePanel("Obesity in New York"),
+  titlePanel("Summary of the Obesity  in New York"),
   
   mainPanel(
     h1("Summary"),
