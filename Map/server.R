@@ -5,7 +5,7 @@ source('InteractiveMap.R')
 
 # using shiny server to build the app with the output of the map and input of the mapping values
 shinyServer(function(input, output) {
-  output$BuildMap <- renderPlotly({
+  output$BuildMap <- renderLeaflet({
     return(BuildMap(input$Weights))
   })
 })
