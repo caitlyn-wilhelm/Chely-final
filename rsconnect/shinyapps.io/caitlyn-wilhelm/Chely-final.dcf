@@ -1,0 +1,11 @@
+name: Chely-final
+title: Chely-final
+account: caitlyn-wilhelm
+server: shinyapps.io
+appId: 143291
+bundleId: 641106
+url: https://caitlyn-wilhelm.shinyapps.io/Chely-final/
+when: 1481226023.3653
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Chart 2/server.R|Chart 2/ui.R|Chart1/server.R|Chart1/ui.R|Data/StudentWeight.csv|Map/server.R|Map/ui.R|scripts/buildvisual.R|scripts/InteractiveMap.R|Summary/server.r|Summary/ui.r

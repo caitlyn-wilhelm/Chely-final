@@ -3,7 +3,7 @@ library(shiny)
 library(plotly)
 
 # reading in the data for the student weight in New York 
-Student.Weight <- read.csv("~/Info 201/Assignments/Chely-final/Data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
+Student.Weight <- read.csv("./Data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
 
 # creating a new data frame to select only certain columns
 Student.Weight.1 <- select(Student.Weight, AREA.NAME, COUNTY, GRADE.LEVEL, NO..OBESE, NO..OVERWEIGHT, NO..OVERWEIGHT.OR.OBESE)

@@ -3,10 +3,8 @@ library(shiny)
 library(plotly)
 library(leaflet)
 
-#set working directory 
-setwd('~/Info 201/Assignments/Chely-final')
 # sourcing in the data from buildvisual.R
-source('./Chart1//buildvisual.R')
+source('./Chart1/buildvisual.R')
 #source for map :)
 source('./Map/InteractiveMap.R')
 #set source for summary page

@@ -6,7 +6,7 @@ library(maptools)
 library(RColorBrewer)
 
 #Read in data from csv in Data folder
-data <- read.csv("~/Info 201/Assignments/Chely-final/Data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
+data <- read.csv("./Data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
 
 #modify data to fit for a map
 #-----------------------------
@@ -30,7 +30,7 @@ data[40,2] <- "ST. LAWRENCE"
 #----------------------------
 
 # read in map data as a Spatial Polygons Data Frame
-map.data <- readShapeSpatial("~/Info 201/Assignments/Chely-final/Data/NY_Map/NY_counties_clip.shp")
+map.data <- readShapeSpatial("./Data/NY_Map/NY_counties_clip.shp")
 
 #change county names to uppercase for merge
 map.data$NAME <- toupper(map.data$NAME)
