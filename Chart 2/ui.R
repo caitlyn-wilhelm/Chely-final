@@ -2,7 +2,7 @@ library(shiny)
 library(dplyr)
 library(plotly)
 #Read in data
-Student.Info <- read.csv("Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
+Student.Info <- read.csv("~/Info 201/Assignments/Chely-final/Data/Student_Weight_Status_Category_Reporting_Results__Beginning_2010.csv")
 #Select columns that are needed for barplot
 Student.Info.Weight <- select(Student.Info, AREA.NAME, COUNTY, GRADE.LEVEL, NO..OBESE, NO..OVERWEIGHT, NO..OVERWEIGHT.OR.OBESE)
 #Creating UI for application that draws a barplot
@@ -16,12 +16,12 @@ shinyUI(fluidPage(
              to show the district in which that number of students belong to"),
     #Select input that allows you to pick which county you want to be represented in the barplot 
     selectInput("county", "County:", choices = Student.Info.Weight$COUNTY, selected = 'Albany'
-    ),
+    )
     #Creates the main panel
-    mainPanel(
+  ),
+  mainPanel(
       #Creates the plotly output
       plotlyOutput("barplot")
     )
-  )
 )
 )
